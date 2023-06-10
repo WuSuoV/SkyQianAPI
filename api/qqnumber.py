@@ -51,7 +51,7 @@ class qqnum:
         qrsig = self.Get_QRcode()
         ptqrtoken = self.Get_ptqrToken(qrsig)
         start_time = time.time()
-        while time.time() - start_time <= 60:
+        while time.time() - start_time <= 30:
             url = 'https://ssl.ptlogin2.qq.com/ptqrlogin?u1=https%3A%2F%2Fqzs.qq.com%2Fqzone%2Fv5%2Floginsucc.html%3Fpara%3Dizone&ptqrtoken=' + str(
                 ptqrtoken) + '&ptredirect=0&h=1&t=1&g=1&from_ui=1&ptlang=2052&action=0-0-' + str(
                 time.time()) + '&js_ver=20032614&js_type=1&login_sig=&pt_uistyle=40&aid=549000912&daid=5&'

@@ -67,7 +67,7 @@ def qqnum():
            '1. 点击开始验证<br />' \
            '2. 点击获取图片<br />' \
            '3. 打开qq，进行扫码，成功后页面会返回数据<br />' \
-           '注意：验证时间会60s，请勿超时！<br />' \
+           '注意：验证时间会30s，请勿超时！<br />' \
            f'<a href="/api/qqnum/{qq}?&token={request.args.get("token")}">开始验证</a>&emsp;&emsp;' \
            f'<a href="/api/qqnum/img?qq={qq}&token={request.args.get("token")}" target="_blank">获取图片</a>'
 
