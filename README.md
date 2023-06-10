@@ -18,3 +18,19 @@
 10. `/api/randompasswd` : 生成随机密码，可选参数num: int，不加默认为16
 
 可以自行搭建，项目已开源。 
+
+## 项目地址
+
+Github：[https://github.com/Qiantigers/SkyQianAPI](https://github.com/Qiantigers/SkyQianAPI)
+
+## 使用说明
+
+Python版本：3.8
+
+使用框架：Flask
+
+运行建议使用gunicorn，下载源码后，只需要更改 `config.py` 中的相关配置。
+
+## 结语
+
+经验不多，代码写的不是很优雅。
