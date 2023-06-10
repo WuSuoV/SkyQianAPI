@@ -68,7 +68,7 @@ def qqnum():
            '2. 点击获取图片<br />' \
            '3. 打开qq，进行扫码，成功后页面会返回数据<br />' \
            '注意：验证时间会60s，请勿超时！<br />' \
-           f'<a href="/api/qqnum/{qq}">开始验证</a>&emsp;&emsp;' \
+           f'<a href="/api/qqnum/{qq}?&token={request.args.get("token")}">开始验证</a>&emsp;&emsp;' \
            f'<a href="/api/qqnum/img?qq={qq}&token={request.args.get("token")}" target="_blank">获取图片</a>'
 
 
@@ -76,7 +76,7 @@ def qqnum():
 @safe.verify_token
 def qqnum_img():
     qq = request.args.get('qq')
-    base64 = img_base64.img_to_base64_from_local(f"./static/image/{qq}.png")
+    base64 = img_base64.img_to_base64_from_local(f"{myconfig.get('rootpath')}/static/image/{qq}.png")
     return f'<div style="text-align: center;"><img src="{base64}"></div>'
 
 
@@ -112,5 +112,6 @@ def randompasswd():
         return {'password': random_password.passwd(int(num)), 'length': int(num)}
 
 if __name__ == '__main__':
-    app.run(debug=True)
-    # app.run(threaded=True)
+    app.run(host='0.0.0.0', port=12138)
+else:
+    application = app

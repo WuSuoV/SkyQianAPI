@@ -11,8 +11,3 @@ def reduction(url):
         return {'statu': 'error', 'msg': 'it is not a short url'}
     else:
         return {'statu': 'success', 'url': res}
-
-
-if __name__ == '__main__':
-    url = 'http://hooqian.comm'
-    print(reduction(url))

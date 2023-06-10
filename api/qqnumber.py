@@ -6,7 +6,7 @@ from config import myconfig
 
 class qqnum:
     id: dict = {'name': None,
-                'imgpath': myconfig.get('rootpath') + 'static/image'}
+                'imgpath': myconfig.get('rootpath') + '/static/image'}
 
     def __init__(self, qq):
         self.id['name'] = qq
@@ -79,6 +79,3 @@ class qqnum:
             time.sleep(2)
         print(time.strftime('%H:%M:%S'), ' 已超时')
 
-
-if __name__ == '__main__':
-    pass

@@ -21,8 +21,3 @@ def get_url_1(url):
 def get_url_2(url):
     r = requests.get(url, headers=headers).text
     return r
-
-
-if __name__ == '__main__':
-   qq = '925485506'
-   print(listen_time(qq))
