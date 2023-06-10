@@ -1,4 +1,4 @@
 myconfig = {
     'token': [None],
-    'rootpath': r'D:\Users\SkyQian\Documents\Jetbrains Files\PyCharm\myAPI'
+    'rootpath': '填写项目的绝对路径'
 }
