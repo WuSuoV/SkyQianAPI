@@ -78,4 +78,5 @@ class qqnum:
                 print('第' + str(e.__traceback__.tb_lineno) + '行文件报错')
             time.sleep(2)
         print(time.strftime('%H:%M:%S'), ' 已超时')
+        return 'timeout'
 
