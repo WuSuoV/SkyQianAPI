@@ -9,7 +9,7 @@
 1. `/api/wxred/{url}` : 检测域名是否被微信拦截。
 2. `/api/dwz/{url}` : 生成短网址，调用 dwz.wa 的api
 3. `/api/jwz/{url}` : 还原短网址。
-4. `/api/qqnum` : 扫码验证与目标QQ是否相符，点开有步骤说明。
+4. `/api/qqnum` : 参数qq（必选），值为你待验证的QQ号。扫码验证与目标QQ是否相符，点开有步骤说明。
 5. `/api/imgbase64/{url}` : 图片转base64格式。
 6. `/api/qqmusic/listen-time/{qq}` : 增加QQ音乐时长
 7. `/api/onedrive/zl/{url}` : 获取OneDrive文件分享的直链，仅限于单文件、非个人版。
