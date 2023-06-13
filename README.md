@@ -16,6 +16,7 @@
 8. `/api/search/bbs/{keywords}` : 通过关键字搜索1OVE论坛中的资源
 9. `/api/yiyan` : 返回一个有意思的句子（一言）
 10. `/api/randompasswd` : 生成随机密码，可选参数num: int，不加默认为16
+11. `/api/email` : 参数text：需要发送的文本（必选），邮箱的配置进入配置文件设置
 
 可以自行搭建，项目已开源。 
 
