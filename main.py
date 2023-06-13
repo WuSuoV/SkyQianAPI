@@ -19,6 +19,31 @@ def index():
     return introduction.introduction() + '<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id:"JsTawo0DkJhtEmv4",ck:"JsTawo0DkJhtEmv4"})</script>'
 
 
+@app.route('/api/urlcode/<mode>/<path:url>', methods=['GET'])
+@safe.verify_token
+def url_code(mode, url):
+    if mode == 'encode':
+        return jsonxasc({'mode': '编码', 'result': codec.url_encode(url)})
+    if mode == 'decode':
+        return jsonxasc({'mode': '解码', 'result': codec.url_decode(url)})
+
+    return 'error'
+
+
+@app.route('/api/base64/<mode>/<text>', methods=['GET', 'POST'])
+@safe.verify_token
+def base64(mode, text):
+    if mode == 'encode':
+        return jsonxasc({'mode': '编码', 'text': text, 'base64': codec.base64_encode(text)})
+    if mode == 'decode':
+        try:
+            return jsonxasc({'mode': '解码', 'base64': text, 'text': codec.base64_decode(text)})
+        except Exception:
+            return jsonxasc({'mode': '解码', 'base64': text, 'msg': '检查一下你输入的格式正确吗？'})
+
+    return 'error'
+
+
 @app.route('/api/email', methods=['GET', 'POST'])
 @safe.verify_token
 def email():
@@ -60,19 +85,19 @@ def wxred(url):
 @app.route('/api/onedrive/zl/<path:url>', methods=['GET'])
 @safe.verify_token
 def zl(url):
-    return onedrive_link.judgeLink(url)
+    return jsonxasc(onedrive_link.judgeLink(url))
 
 
 @app.route('/api/dwz/<path:url>', methods=['GET'])
 @safe.verify_token
 def dwz(url):
-    return short_url.short(url)
+    return jsonxasc(short_url.short(url))
 
 
 @app.route('/api/jwz/<path:url>', methods=['GET'])
 @safe.verify_token
 def jwz(url):
-    return reduction_url.reduction(url)
+    return jsonxasc(reduction_url.reduction(url))
 
 
 @app.route('/api/qqnum', methods=['GET'])
@@ -102,11 +127,11 @@ def qqnum_qq(qq):
     myqq = qqnumber.qqnum(qq)
     your_qq = myqq.Get_QQ()
     if qq == your_qq:
-        return {'status': 'success', 'sample qq': qq, 'your qq': your_qq,
-                'msg': 'Your QQ is the same as the detected QQ'}
+        return jsonxasc({'status': 'success', 'sample qq': qq, 'your qq': your_qq,
+                         'msg': 'Your QQ is the same as the detected QQ'})
     else:
-        return {'status': 'failure', 'sample qq': qq, 'your qq': your_qq,
-                'msg': 'Your QQ is different from the detected QQ, please check the QQ you used to scan the code'}
+        return jsonxasc({'status': 'failure', 'sample qq': qq, 'your qq': your_qq,
+                         'msg': 'Your QQ is different from the detected QQ, please check the QQ you used to scan the code'})
 
 
 @app.route('/api/imgbase64/<path:url>', methods=['GET'])
@@ -114,7 +139,7 @@ def qqnum_qq(qq):
 def imgbase64(url):
     flag = re.match(r'http[s]://', url)
     if flag is not None:
-        return {'base64': img_base64.img_to_base64_from_url(url)}
+        return jsonxasc({'base64': img_base64.img_to_base64_from_url(url)})
 
 
 @app.route('/api/randompasswd', methods=['GET'])
@@ -122,9 +147,9 @@ def imgbase64(url):
 def randompasswd():
     num = request.args.get('num')
     if num is None:
-        return {'password': random_password.passwd(16), 'length': 16}
+        return jsonxasc({'password': random_password.passwd(16), 'length': 16})
     else:
-        return {'password': random_password.passwd(int(num)), 'length': int(num)}
+        return jsonxasc({'password': random_password.passwd(int(num)), 'length': int(num)})
 
 
 if __name__ == '__main__':

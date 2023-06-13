@@ -17,6 +17,8 @@
 9. `/api/yiyan` : 返回一个有意思的句子（一言）
 10. `/api/randompasswd` : 生成随机密码，可选参数num: int，不加默认为16
 11. `/api/email` : 参数text：需要发送的文本（必选），邮箱的配置进入配置文件设置
+12. `/api/urlcode/{mode}/{url}` : mode为encode或者decode，代表编码和解码。url为所要编码的网址
+13. `/api/base64/{mode}/{text}` : mode为encode或者decode，text：如果是编码就输入文字，如果是解码就只能输入base64格式的编码
 
 可以自行搭建，项目已开源。 
 
