@@ -17,6 +17,19 @@ def index():
     return introduction.introduction()
 
 
+@app.route('/api/email', methods=['GET', 'POST'])
+@safe.verify_token
+def email():
+    text = request.args.get('text')
+    e = aemail.aemail()
+    e.set_text(text)
+    msg = e.send()
+    if msg == 'success':
+        return jsonxasc({'status': msg, 'text': text})
+    else:
+        return jsonxasc({'status': 'error', 'msg': msg, '提示': '邮件发送失败，请检查你的邮件配置。'})
+
+
 @app.route('/api/search/bbs/<keywords>', methods=['GET'])
 @safe.verify_token
 def search_bbs(keywords):
@@ -27,6 +40,7 @@ def search_bbs(keywords):
 @safe.verify_token
 def listen(qq):
     return jsonxasc(qqmusic.listen_time(qq))
+
 
 @app.route('/api/yiyan', methods=['GET'])
 @safe.verify_token
@@ -87,10 +101,10 @@ def qqnum_qq(qq):
     your_qq = myqq.Get_QQ()
     if qq == your_qq:
         # os.remove(myqq.id['imgpath'] + '/' + myqq.id['name'] + '.png')
-        return {'statu': 'success', 'sample qq': qq, 'your qq': your_qq,
+        return {'status': 'success', 'sample qq': qq, 'your qq': your_qq,
                 'msg': 'Your QQ is the same as the detected QQ'}
     else:
-        return {'statu': 'failure', 'sample qq': qq, 'your qq': your_qq,
+        return {'status': 'failure', 'sample qq': qq, 'your qq': your_qq,
                 'msg': 'Your QQ is different from the detected QQ, please check the QQ you used to scan the code'}
 
 
@@ -110,6 +124,7 @@ def randompasswd():
         return {'password': random_password.passwd(16), 'length': 16}
     else:
         return {'password': random_password.passwd(int(num)), 'length': int(num)}
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=12138)

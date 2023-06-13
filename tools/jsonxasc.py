@@ -2,4 +2,5 @@ import json
 
 
 def jsonxasc(ajson):
-    return json.dumps(ajson, ensure_ascii=False, sort_keys=True, indent=4, separators=(', ', ':　'))
+    return '<pre>' + json.dumps(ajson, ensure_ascii=False, sort_keys=False, indent=4,
+                                separators=(', ', ':　')) + '</pre>'
