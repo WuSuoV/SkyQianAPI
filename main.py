@@ -16,7 +16,7 @@ safe = token.Token(myconfig.get('token'))
 @app.route('/')
 # @safe.verify_token
 def index():
-    return introduction.introduction()
+    return introduction.introduction() + '<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id:"JsTawo0DkJhtEmv4",ck:"JsTawo0DkJhtEmv4"})</script>'
 
 
 @app.route('/api/email', methods=['GET', 'POST'])
