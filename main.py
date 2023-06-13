@@ -1,13 +1,15 @@
 import re
-from flask import Flask, request, jsonify
+
+from flask import Flask, request
+
 from api import *
-from security import token
 from config import myconfig
+from security import token
 from tools import introduction
+from tools.param import param_value
 from tools.jsonxasc import jsonxasc
 
 app = Flask(__name__)
-app.config['JSON_AS_ASCII'] = False
 safe = token.Token(myconfig.get('token'))
 
 
@@ -20,7 +22,7 @@ def index():
 @app.route('/api/email', methods=['GET', 'POST'])
 @safe.verify_token
 def email():
-    text = request.args.get('text')
+    text = param_value('text')
     e = aemail.aemail()
     e.set_text(text)
     msg = e.send()
@@ -52,7 +54,7 @@ def yi_yan():
 @safe.verify_token
 def wxred(url):
     res = detect_domain_in_tencent.get_res(url)
-    return res
+    return jsonxasc(res)
 
 
 @app.route('/api/onedrive/zl/<path:url>', methods=['GET'])
@@ -100,7 +102,6 @@ def qqnum_qq(qq):
     myqq = qqnumber.qqnum(qq)
     your_qq = myqq.Get_QQ()
     if qq == your_qq:
-        # os.remove(myqq.id['imgpath'] + '/' + myqq.id['name'] + '.png')
         return {'status': 'success', 'sample qq': qq, 'your qq': your_qq,
                 'msg': 'Your QQ is the same as the detected QQ'}
     else:
@@ -127,6 +128,6 @@ def randompasswd():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=12138)
+    app.run(host='0.0.0.0', port=12138, debug=True)
 else:
     application = app

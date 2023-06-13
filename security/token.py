@@ -1,7 +1,7 @@
 import functools
 
 from flask import request
-
+from tools.param import param_value
 
 class Token:
     token: list
@@ -12,7 +12,7 @@ class Token:
     def verify_token(self, func):
         @functools.wraps(func)
         def func_new(*args, **kwargs):
-            token = request.args.get('token')
+            token = param_value('token')
             if token in self.token:
                 return func(*args, **kwargs)
             else:
