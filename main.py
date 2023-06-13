@@ -19,9 +19,10 @@ def index():
     return introduction.introduction() + '<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id:"JsTawo0DkJhtEmv4",ck:"JsTawo0DkJhtEmv4"})</script>'
 
 
-@app.route('/api/urlcode/<mode>/<path:url>', methods=['GET'])
+@app.route('/api/urlcode/<mode>/<path:url>/', methods=['GET', 'POST'])
 @safe.verify_token
 def url_code(mode, url):
+    print(url)
     if mode == 'encode':
         return jsonxasc({'mode': '编码', 'result': codec.url_encode(url)})
     if mode == 'decode':
@@ -30,7 +31,7 @@ def url_code(mode, url):
     return 'error'
 
 
-@app.route('/api/base64/<mode>/<text>', methods=['GET', 'POST'])
+@app.route('/api/base64/<mode>/<text>/', methods=['GET', 'POST'])
 @safe.verify_token
 def base64(mode, text):
     if mode == 'encode':
@@ -44,7 +45,7 @@ def base64(mode, text):
     return 'error'
 
 
-@app.route('/api/email', methods=['GET', 'POST'])
+@app.route('/api/email/', methods=['GET', 'POST'])
 @safe.verify_token
 def email():
     text = param_value('text')
@@ -57,50 +58,50 @@ def email():
         return jsonxasc({'status': 'error', 'msg': msg, '提示': '邮件发送失败，请检查你的邮件配置。'})
 
 
-@app.route('/api/search/bbs/<keywords>', methods=['GET'])
+@app.route('/api/search/bbs/<keywords>/', methods=['GET'])
 @safe.verify_token
 def search_bbs(keywords):
     return jsonxasc(search.search_from_1ovebbs(keywords))
 
 
-@app.route('/api/qqmusic/listen-time/<int:qq>', methods=['GET'])
+@app.route('/api/qqmusic/listen-time/<int:qq>/', methods=['GET'])
 @safe.verify_token
 def listen(qq):
     return jsonxasc(qqmusic.listen_time(qq))
 
 
-@app.route('/api/yiyan', methods=['GET'])
+@app.route('/api/yiyan/', methods=['GET'])
 @safe.verify_token
 def yi_yan():
     return jsonxasc(yiyan.yiyan())
 
 
-@app.route('/api/wxred/<path:url>', methods=['GET'])
+@app.route('/api/wxred/<path:url>/', methods=['GET'])
 @safe.verify_token
 def wxred(url):
     res = detect_domain_in_tencent.get_res(url)
     return jsonxasc(res)
 
 
-@app.route('/api/onedrive/zl/<path:url>', methods=['GET'])
+@app.route('/api/onedrive/zl/<path:url>/', methods=['GET'])
 @safe.verify_token
 def zl(url):
     return jsonxasc(onedrive_link.judgeLink(url))
 
 
-@app.route('/api/dwz/<path:url>', methods=['GET'])
+@app.route('/api/dwz/<path:url>/', methods=['GET'])
 @safe.verify_token
 def dwz(url):
     return jsonxasc(short_url.short(url))
 
 
-@app.route('/api/jwz/<path:url>', methods=['GET'])
+@app.route('/api/jwz/<path:url>/', methods=['GET'])
 @safe.verify_token
 def jwz(url):
     return jsonxasc(reduction_url.reduction(url))
 
 
-@app.route('/api/qqnum', methods=['GET'])
+@app.route('/api/qqnum/', methods=['GET'])
 @safe.verify_token
 def qqnum():
     qq = request.args.get('qq')
@@ -113,7 +114,7 @@ def qqnum():
            f'<a href="/api/qqnum/img?qq={qq}&token={request.args.get("token")}" target="_blank">获取图片</a>'
 
 
-@app.route('/api/qqnum/img', methods=['GET'])
+@app.route('/api/qqnum/img/', methods=['GET'])
 @safe.verify_token
 def qqnum_img():
     qq = request.args.get('qq')
@@ -121,7 +122,7 @@ def qqnum_img():
     return f'<div style="text-align: center;"><img src="{base64}"></div>'
 
 
-@app.route('/api/qqnum/<qq>', methods=['GET'])
+@app.route('/api/qqnum/<qq>/', methods=['GET'])
 @safe.verify_token
 def qqnum_qq(qq):
     myqq = qqnumber.qqnum(qq)
@@ -134,7 +135,7 @@ def qqnum_qq(qq):
                          'msg': 'Your QQ is different from the detected QQ, please check the QQ you used to scan the code'})
 
 
-@app.route('/api/imgbase64/<path:url>', methods=['GET'])
+@app.route('/api/imgbase64/<path:url>/', methods=['GET'])
 @safe.verify_token
 def imgbase64(url):
     flag = re.match(r'http[s]://', url)
@@ -142,7 +143,7 @@ def imgbase64(url):
         return jsonxasc({'base64': img_base64.img_to_base64_from_url(url)})
 
 
-@app.route('/api/randompasswd', methods=['GET'])
+@app.route('/api/randompasswd/', methods=['GET'])
 @safe.verify_token
 def randompasswd():
     num = request.args.get('num')
