@@ -6,19 +6,20 @@
 
 记得加上参数 `?token=xxxxx`
 
-1. `/api/wxred/{url}` : 检测域名是否被微信拦截。
-2. `/api/dwz/{url}` : 生成短网址，调用 dwz.wa 的api
-3. `/api/jwz/{url}` : 还原短网址。
-4. `/api/qqnum` : 参数qq（必选），值为你待验证的QQ号。扫码验证与目标QQ是否相符，点开有步骤说明。
-5. `/api/imgbase64/{url}` : 图片转base64格式。
-6. `/api/qqmusic/listen-time/{qq}` : 增加QQ音乐时长
-7. `/api/onedrive/zl/{url}` : 获取OneDrive文件分享的直链，仅限于单文件、非个人版。
-8. `/api/search/bbs/{keywords}` : 通过关键字搜索1OVE论坛中的资源
-9. `/api/yiyan` : 返回一个有意思的句子（一言）
-10. `/api/randompasswd` : 生成随机密码，可选参数num: int，不加默认为16
-11. `/api/email` : 参数text：需要发送的文本（必选），邮箱的配置进入配置文件设置
-12. `/api/urlcode/{mode}/{url}` : mode为encode或者decode，代表编码和解码。url为所要编码的网址
-13. `/api/base64/{mode}/{text}` : mode为encode或者decode，text：如果是编码就输入文字，如果是解码就只能输入base64格式的编码
+1. `/api/wxred/{url}/` : 检测域名是否被微信拦截。
+2. `/api/dwz/{url}/` : 生成短网址，调用 dwz.wa 的api
+3. `/api/jwz/{url}/` : 还原短网址。
+4. `/api/qqnum/` : 参数qq（必选），值为你待验证的QQ号。扫码验证与目标QQ是否相符，点开有步骤说明。
+5. `/api/imgbase64/{url}/` : 图片转base64格式。
+6. `/api/qqmusic/listen-time/{qq}/` : 增加QQ音乐时长
+7. `/api/onedrive/zl/{url}/` : 获取OneDrive文件分享的直链，仅限于单文件、非个人版。
+8. `/api/search/bbs/{keywords}/` : 通过关键字搜索1OVE论坛中的资源
+9. `/api/yiyan/` : 返回一个有意思的句子（一言）
+10. `/api/randompasswd/` : 生成随机密码，可选参数num: int，不加默认为16
+11. `/api/email/` : 参数text：需要发送的文本（必选），邮箱的配置进入配置文件设置
+12. `/api/urlcode/{mode}/{url}/` : mode为encode或者decode，代表编码和解码。url为所要编码的网址
+13. `/api/base64/{mode}/{text}/` : mode为encode或者decode，text：如果是编码就输入文字，如果是解码就只能输入base64格式的编码
+14. `/api/translate/youdao/` : 有道翻译接口，参数为text：需要翻译的文本，自动检测文本语言类型
 
 可以自行搭建，项目已开源。 
 
