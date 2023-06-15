@@ -31,6 +31,13 @@ def url_code(mode, url):
     return 'error'
 
 
+@app.route('/api/translate/youdao/', methods=['GET', 'POST'])
+@safe.verify_token
+def trans_youdao():
+    text = param_value('text')
+    return jsonxasc(translate.youdao(text))
+
+
 @app.route('/api/base64/<mode>/<text>/', methods=['GET', 'POST'])
 @safe.verify_token
 def base64(mode, text):
