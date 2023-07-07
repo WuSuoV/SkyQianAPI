@@ -29,7 +29,7 @@ Github：[https://github.com/Qiantigers/SkyQianAPI](https://github.com/Qiantiger
 
 ## 使用说明
 
-Python版本：3.8
+Python版本：3.8以上
 
 使用框架：Flask
 

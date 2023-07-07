@@ -1,12 +1,12 @@
 myconfig = {
-    'token': [None],
-    'rootpath': '项目根目录的绝对路径'
+    'token': [None,'skyqian'],
+    'rootpath': r'D:\Users\SkyQian\Documents\GitHub\SkyQianAPI'
 }
 
 myemail = {
-    'host': 'SMTP服务',
-    'user': '账号',
-    'password': '密码',
-    'sender': '你的邮箱号',
-    'receiver': '接收者的邮箱号'
+    'host': 'smtp.88.com',
+    'user': 'qiantigers@88.com',
+    'password': 'jUa8ACdeZjKE97b4',
+    'sender': 'qiantigers@88.com',
+    'receiver': 'skyqian@88.com'
 }

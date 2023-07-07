@@ -1,16 +1,23 @@
+import json
+
 from flask import request
 
 
 def param_value(key):
-    method = request.method
-    if method == 'GET':
+    if request.method == 'GET':
         return request.args.get(key)
 
-    if method == 'POST':
-        rtype = request.content_type
-        if rtype.startswith('application/json'):
+    if request.method == 'POST':
+        if request.args.get(key) is not None:
+            return request.args.get(key)
+
+        r_type = request.content_type
+        if 'application/json' in r_type:
             return request.json.get(key)
-        elif rtype.startswith('application/form-data'):
+        elif 'application/form-data' in r_type or 'application/x-www-form-urlencoded' in r_type:
             return request.form.get(key)
         else:
-            return request.values.get(key)
+            try:
+                return json.loads(request.get_data()).get(key)
+            except Exception:
+                return 'Please submit in json format'

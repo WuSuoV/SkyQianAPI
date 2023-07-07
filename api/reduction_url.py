@@ -5,9 +5,21 @@ def reduction(url):
     try:
         res = requests.get(url, allow_redirects=False).headers.get('Location')
     except:
-        return {'statu': 'error', 'msg': 'URL not accessible'}
+        return {
+            'code': 400,
+            'statu': 'error',
+            'msg': 'URL not accessible'
+        }
 
     if res is None:
-        return {'statu': 'error', 'msg': 'it is not a short url'}
+        return {
+            'code': 400,
+            'statu': 'error',
+            'msg': 'it is not a short url'
+        }
     else:
-        return {'statu': 'success', 'url': res}
+        return {
+            'code': 200,
+            'statu': 'success',
+            'url': res
+        }
