@@ -49,12 +49,27 @@ h4 {
     padding: 5px;
 }
 
+/*定义竖屏*/
+@media screen and (orientation: portrait) {
+    #main, .msg {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}
+
+/*定义横屏*/
+@media screen and (orientation: landscape) {
+    #main, .msg {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+}
+
 #main, .msg {
     word-wrap: break-word;
 
     margin-top: 20px;
-    margin-left: 5%;
-    margin-right: 5%;
+
     margin-bottom: 20px;
 
     padding-top: 20px;
