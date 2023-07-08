@@ -17,46 +17,62 @@ def index():
     return render_template('index.html', introduction=introduction.introduction())
 
 
-@app.route('/api/urlcode/<mode>/<path:url>/', methods=['GET', 'POST'])
-@safe.verify_token
-def url_code(mode, url):
-    print(url)
-    if mode == 'encode':
+@app.route('/api/urlcode/', methods=['GET', 'POST'])
+# @safe.verify_token
+def url_code():
+    mode = param_value('mode')
+    url = param_value('url')
+
+    if mode is None or url is None:
+        return render_template('api/urlcode.html')
+
+    if mode == 'encode' and url != '':
         return jsonxasc({
             'code': 200,
             'msg': '编码',
             'data': codec.url_encode(url)
         })
-    if mode == 'decode':
+    if mode == 'decode' and url != '':
         return jsonxasc({
             'code': 200,
             'mode': '解码',
             'result': codec.url_decode(url)
         })
 
-    return {
-        'code': 500,
-        'msg': 'error'
-    }
+    return render_template('api/urlcode.html')
 
 
-@app.route('/api/translate/youdao/', methods=['GET', 'POST'])
-@safe.verify_token
+@app.route('/api/translate/', methods=['GET', 'POST'])
+# @safe.verify_token
 def trans_youdao():
+    mode = param_value('mode')
     text = param_value('text')
-    return jsonxasc(translate.youdao(text))
+
+    if mode is None or text is None:
+        return render_template('api/translate.html')
+
+    if mode == 'youdao' and text != '':
+        return jsonxasc(translate.youdao(text))
+
+    return render_template('api/translate.html')
 
 
-@app.route('/api/base64/<mode>/<text>/', methods=['GET', 'POST'])
-@safe.verify_token
-def base64(mode, text):
-    if mode == 'encode':
+@app.route('/api/base64/', methods=['GET', 'POST'])
+# @safe.verify_token
+def base64():
+    mode = param_value('mode')
+    text = param_value('text')
+
+    if mode is None or text is None:
+        return render_template('api/base64.html')
+
+    if mode == 'encode' and text != '':
         return jsonxasc({
             'mode': '编码',
             'text': text,
             'base64': codec.base64_encode(text)
         })
-    if mode == 'decode':
+    if mode == 'decode' and text != '':
         try:
             return jsonxasc({
                 'code': 200,
@@ -72,16 +88,17 @@ def base64(mode, text):
                 'msg': '检查一下你输入的格式正确吗？'
             })
 
-    return {
-        'code': 500,
-        'msg': 'error'
-    }
+    return render_template('api/base64.html')
 
 
 @app.route('/api/email/', methods=['GET', 'POST'])
 @safe.verify_token
 def email():
     text = param_value('text')
+
+    if text is None or text == '':
+        return render_template('api/email.html')
+
     e = aemail.aemail()
     e.set_text(text)
     msg = e.send()
@@ -98,46 +115,86 @@ def email():
         })
 
 
-@app.route('/api/search/bbs/<keywords>/', methods=['GET'])
+@app.route('/api/search/', methods=['GET'])
 @safe.verify_token
-def search_bbs(keywords):
-    return jsonxasc(search.search_from_1ovebbs(keywords))
+def search_bbs():
+    mode = param_value('mode')
+    keywords = param_value('keywords')
+
+    if mode is None or keywords is None:
+        return render_template('api/search.html')
+
+    if mode == 'bbs' and keywords != '':
+        return jsonxasc(search.search_from_1ovebbs(keywords))
+
+    return render_template('api/search.html')
 
 
-@app.route('/api/qqmusic/listen-time/<int:qq>/', methods=['GET'])
-@safe.verify_token
-def listen(qq):
-    return jsonxasc(qqmusic.listen_time(qq))
+@app.route('/api/qqmusic/', methods=['GET'])
+# @safe.verify_token
+def listen():
+    mode = param_value('mode')
+    qq = param_value('qq')
+    if mode is None or qq is None:
+        return render_template('api/qqmusic.html')
+
+    if mode == 'listen-time' and qq != '':
+        return jsonxasc(qqmusic.listen_time(qq))
+
+    return render_template('api/qqmusic.html')
 
 
 @app.route('/api/yiyan/', methods=['GET'])
-@safe.verify_token
+# @safe.verify_token
 def yi_yan():
     return jsonxasc(yiyan.yiyan())
 
 
-@app.route('/api/wxred/<path:url>/', methods=['GET'])
-@safe.verify_token
-def wxred(url):
-    res = detect_domain_in_tencent.get_res(url)
-    return jsonxasc(res)
+@app.route('/api/wxred/', methods=['GET'])
+# @safe.verify_token
+def wxred():
+    url = param_value('url')
+
+    if url is None:
+        return render_template('api/wxred.html')
+
+    if url is not None and url != '':
+        res = detect_domain_in_tencent.get_res(url)
+        return jsonxasc(res)
+    return render_template('api/wxred.html')
 
 
-@app.route('/api/onedrive/zl/<path:url>/', methods=['GET'])
-@safe.verify_token
-def zl(url):
-    return jsonxasc(onedrive_link.judgeLink(url))
+@app.route('/api/onedrive/', methods=['GET'])
+# @safe.verify_token
+def zl():
+    mode = param_value('mode')
+    url = param_value('url')
+
+    if mode is None or url is None:
+        return render_template('api/onedrive.html')
+
+    if mode == 'zl' and url != '':
+        return jsonxasc(onedrive_link.judgeLink(url))
+
+    return render_template('api/onedrive.html')
 
 
-@app.route('/api/dwz/<path:url>/', methods=['GET'])
-@safe.verify_token
-def dwz(url):
+@app.route('/api/dwz/', methods=['GET'])
+# @safe.verify_token
+def dwz():
+    url = param_value('url')
+    if url is None or url == '':
+        return render_template('api/dwz.html')
+
     return jsonxasc(short_url.short(url))
 
 
-@app.route('/api/jwz/<path:url>/', methods=['GET'])
-@safe.verify_token
-def jwz(url):
+@app.route('/api/jwz/', methods=['GET'])
+# @safe.verify_token
+def jwz():
+    url = param_value('url')
+    if url is None or url == '':
+        return render_template('api/jwz.html')
     return jsonxasc(reduction_url.reduction(url))
 
 
@@ -184,9 +241,13 @@ def qqnum_qq(qq):
         })
 
 
-@app.route('/api/imgbase64/<path:url>/', methods=['GET'])
-@safe.verify_token
-def imgbase64(url):
+@app.route('/api/imgbase64/', methods=['GET'])
+# @safe.verify_token
+def imgbase64():
+    url = param_value('url')
+    if url is None or url == '':
+        return render_template('api/imgbase64.html')
+
     flag = re.match(r'http[s]://', url)
     if flag is not None:
         return jsonxasc({
@@ -196,12 +257,12 @@ def imgbase64(url):
     else:
         return jsonxasc({
             'code': 500,
-            'msg': 'error'
+            'msg': '输入的不是链接！'
         })
 
 
 @app.route('/api/randompasswd/', methods=['GET'])
-@safe.verify_token
+# @safe.verify_token
 def randompasswd():
     num = request.args.get('num')
     if num is None:
@@ -220,5 +281,3 @@ def randompasswd():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=12138, debug=True)
-else:
-    application = app

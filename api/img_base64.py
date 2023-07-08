@@ -18,7 +18,10 @@ def img_to_base64_from_local(path):
 def img_to_base64_from_url(url):
     try:
         r = requests.get(url, verify=False)
-        if 'image' in r.headers.get('Content-Type') and int(r.headers.get('Content-Length')) <= (1024 * 1024):
+        size = r.headers.get('Content-Length')
+        if size is None:
+            size = 0
+        if 'image' in r.headers.get('Content-Type') and int(size) <= (1024 * 1024):
             image_base64 = base64.b64encode(r.content)
             return "data:image/png;base64," + str(image_base64)[2:-1]
         else:

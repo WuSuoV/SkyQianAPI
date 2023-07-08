@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Base64转换 - SkyQianAPI</title>
+    {% include 'head.html' %}
+    <style>
+        #footer {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<div id="main">
+    <form action="./" method="get">
+        <p>
+            模式：
+            <label><input type="radio" name="mode" value="encode">编码</label>
+            <label><input type="radio" name="mode" value="decode">解码</label>
+        </p>
+        <p>
+            文本：
+            <label><input type="text" name="text"></label>
+        </p>
+        <p><input type="submit" value="提交"></p>
+    </form>
+</div>
+
+<div class="msg">
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th style='text-align:left;'>参数名</th>
+                <th style='text-align:left;'>必填</th>
+                <th style='text-align:left;'>说明</th>
+                <th style='text-align:left;'>参数示例</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style='text-align:left;'>mode</td>
+                <td style='text-align:left;'>是</td>
+                <td style='text-align:left;'>编码为encode，解码为decode</td>
+                <td style='text-align:left;'>encode</td>
+            </tr>
+            <tr>
+                <td style='text-align:left;'>text</td>
+                <td style='text-align:left;'>是</td>
+                <td style='text-align:left;'>文本</td>
+                <td style='text-align:left;'><a href='https://www.skyqian.com' target='_blank' class='url'>https://www.skyqian.com</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+
+</div>
+
+{% include 'footer.html' %}
+</body>
+</html>

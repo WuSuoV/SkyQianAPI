@@ -69,7 +69,6 @@ h4 {
     word-wrap: break-word;
 
     margin-top: 20px;
-
     margin-bottom: 20px;
 
     padding-top: 20px;
@@ -90,10 +89,35 @@ h4 {
 
 
 #footer {
-    /*border-style: dotted;*/
     margin-top: 20px;
     /*position: absolute;*/
     bottom: 0;
     width: 100%;
     text-align: center;
+}
+
+/*表格*/
+table {
+    font-family: verdana, arial, sans-serif;
+    font-size: 11px;
+    color: #333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+}
+
+table th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+}
+
+table td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
 }

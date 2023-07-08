@@ -1,3 +1,5 @@
+import json
+
 import requests
 
 from tools.headers import get_headers
@@ -10,7 +12,10 @@ def listen_time(qq):
     api_url_1 = f'http://api.qdikun.com/api/qqmusic/?qq={qq}'
     api_url_2 = f'https://dachebijia.001api.com/Api/qy?qq={qq}&t=1'
 
-    return [get_url_1(api_url_1), get_url_2(api_url_2)]
+    return {
+        '来源1': get_url_1(api_url_1),
+        '来源2': get_url_2(api_url_2)
+    }
 
 
 def get_url_1(url):
@@ -19,5 +24,5 @@ def get_url_1(url):
 
 
 def get_url_2(url):
-    r = requests.get(url, headers=headers).text
+    r = requests.get(url, headers=headers).json()
     return r

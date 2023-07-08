@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OneDrive - SkyQianAPI</title>
+    {% include 'head.html' %}
+    <style>
+        #footer {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <form method="get" action="./">
+        <p>
+            模式：
+            <label><input type="radio" value="zl" name="mode">生成直链</label>
+        </p>
+        <p>
+            输入单文件的分享链接：
+            <label><input type="url" name="url"></label>
+        </p>
+        <p><input type="submit" value="提交"></p>
+    </form>
+</div>
+
+<div class="msg">
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th style='text-align:left;'>参数名</th>
+                <th style='text-align:left;'>必填</th>
+                <th style='text-align:left;'>说明</th>
+                <th style='text-align:left;'>参数示例</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style='text-align:left;'>mode</td>
+                <td style='text-align:left;'>是</td>
+                <td style='text-align:left;'>模式</td>
+                <td style='text-align:left;'>zl</td>
+            </tr>
+            <tr>
+                <td style='text-align:left;'>url</td>
+                <td style='text-align:left;'>是</td>
+                <td style='text-align:left;'>OneDrive链接</td>
+                <td style='text-align:left;'><a
+                        href='https://skyqian-my.sharepoint.com/:u:/g/personal/example_skyqian_onmicrosoft_com/EYDRNotZ3aJLplKpDZFD2kwBqMhiJjnFBRb-Q0tGKH_yjg'
+                        target='_blank' class='url'>https://skyqian-my.sharepoint.com/:u:/g/personal/example_skyqian_onmicrosoft_com/EYDRNotZ3aJLplKpDZFD2kwBqMhiJjnFBRb-Q0tGKH_yjg</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+
+</div>
+{% include 'footer.html' %}
+</body>
+</html>

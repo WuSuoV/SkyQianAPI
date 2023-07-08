@@ -29,8 +29,16 @@ def detect_domain(url):
 
 
 def get_res(url):
-    res = {2: 'Not blocked', 1: 'Unofficial page', 0: 'Blocked', -1: 'Unknown error'}
+    res = {2: '正常，未被拦截', 1: '显示非官方页面', 0: '警告！已被拦截', -1: '未知错误'}
     num = detect_domain(url)
-    return {'code': num, 'result': res[num]}
-
-
+    if num != -1:
+        return {
+            'code': 200,
+            'url': url,
+            'msg': res[num]
+        }
+    else:
+        return {
+            'code': 500,
+            'msg': res[num]
+        }
